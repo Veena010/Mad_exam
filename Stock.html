@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<center>
+<h1>Real Time Fetch with Simple Balance Sheet Statement</h1>
+<table id='tbl' border=1>
+<tr>
+<th style="width: 120px;"> date  </th>
+<th style="width: 120px;"> netReceivables </th>
+<th style="width: 120px;"> cashAndCashEquivalents </th>
+<th style="width: 120px;"> taxAssets </th>
+<th style="width: 120px;"> otherCurrentLiabilities </th>
+<th style="width: 120px;"> commonStock </th>
+<th style="width: 120px;"> totalInvestments </th>
+</tr>
+</table>
+</center>
+
+</body>
+<!-- https://financialmodelingprep.com/api/v3/balance-sheet-statement/AAPL?period=annual&apikey=RslEVBRQCqRMloHRNgFZKgkM1UhHPCKM" -->
+<script>
+    window.addEventListener('DOMContentLoaded',(event) => {
+        let source = "https://financialmodelingprep.com/api/v3/balance-sheet-statement/AAPL?period=annual&apikey=RslEVBRQCqRMloHRNgFZKgkM1UhHPCKM";
+            fetch(source)
+            .then(response => response.json())
+            .then(data => {
+                
+                var tb = document.getElementById("tbl");
+
+
+                for(let i=0; i<data.length;i++)
+                {
+                    var tr = document.createElement('tr');
+                    var td = document.createElement('td');
+
+                    td.innerHTML = data[i]["date"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td = document.createElement('td');
+
+                    td.innerHTML = data[i]["netReceivables"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td = document.createElement('td');
+
+                    td.innerHTML = data[i]["cashAndCashEquivalents"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td = document.createElement('td');
+
+                    td.innerHTML = data[i]["taxAssets"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td = document.createElement('td');
+
+                    td.innerHTML = data[i]["otherCurrentLiabilities"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td = document.createElement('td');
+
+                    td.innerHTML = data[i]["commonStock"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td = document.createElement('td');
+
+                    td.innerHTML = data[i]["totalInvestments"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);            
+                }
+            })
+            .catch(err => console.log('err', err));
+    
+    });
+</script>
+</html>
